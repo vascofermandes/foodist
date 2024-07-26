@@ -11,6 +11,6 @@ public interface DishService {
 
     Optional<Dish> findById(Long id);
 
-    Dish create(Dish dish);
+    Dish save(Dish dish);
 
 }

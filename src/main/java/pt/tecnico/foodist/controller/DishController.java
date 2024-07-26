@@ -10,7 +10,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/dish")
+@RequestMapping("/dishes")
 public class DishController {
 
     @Autowired
@@ -28,9 +28,7 @@ public class DishController {
 
     @PostMapping
     public Dish create(@RequestBody Dish dish){
-        return dishService.create(dish);
+        return dishService.save(dish);
     }
-
-
 
 }

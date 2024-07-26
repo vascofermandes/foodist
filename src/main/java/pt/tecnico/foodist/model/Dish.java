@@ -1,9 +1,8 @@
 package pt.tecnico.foodist.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Dish {
@@ -15,6 +14,9 @@ public class Dish {
     private String name;
 
     private double price;
+
+    @OneToMany(mappedBy = "dish")
+    private List<DishPhoto> photos;
 
     public Dish(String name, double price) {
         this.name = name;
@@ -46,5 +48,13 @@ public class Dish {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public List<DishPhoto> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<DishPhoto> photos) {
+        this.photos = photos;
     }
 }

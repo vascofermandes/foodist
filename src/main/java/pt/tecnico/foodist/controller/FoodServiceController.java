@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/foodservice")
+@RequestMapping("/foodservices")
 public class FoodServiceController {
 
 

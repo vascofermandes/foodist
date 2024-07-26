@@ -31,8 +31,10 @@ public class DishServiceImp implements DishService {
     }
 
     @Override
-    public Dish create(Dish dish) {
-        logger.info("Creating dish " + dish.getName());
+    public Dish save(Dish dish) {
+        logger.info("Creating dish " + dish.getName() + " number of photos " + dish.getPhotos().size());
         return dishRepository.save(dish);
     }
+
+
 }
