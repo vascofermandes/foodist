@@ -1,0 +1,52 @@
+-- Create food_service table
+CREATE TABLE food_service (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    open_hour TIME NOT NULL,
+    close_hour TIME NOT NULL,
+	latitude DOUBLE PRECISION NOT NULL,
+    longitude DOUBLE PRECISION NOT NULL,
+	campus VARCHAR(255) NOT NULL
+);
+
+-- Create dish table
+CREATE TABLE dish (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    food_service_id INT NOT NULL,
+    FOREIGN KEY (food_service_id) REFERENCES food_service (id) ON DELETE CASCADE
+);
+
+CREATE TABLE dish_photo (
+    id SERIAL PRIMARY KEY,
+    photo_url VARCHAR(255) NOT NULL,
+    dish_id INT NOT NULL,
+    FOREIGN KEY (dish_id) REFERENCES dish (id) ON DELETE CASCADE
+);
+
+-- Insert data into food_service table
+INSERT INTO food_service (name, open_hour, close_hour, latitude, longitude, campus) VALUES
+('Taguspark North Rest', '09:00', '22:00', '38.7379930884004', '-9.303163708928746', 'taguspark'),
+('TagusPark South Rest', '11:00', '23:00', '38.736555805112886', '-9.302205548869441', 'taguspark'),
+('Central Bar', '10:00', '20:00', '38.736592572546805', '-9.139625434648917', 'alameda'),
+('Civil Pingo Doce Rest', '11:00', '23:00', '38.73777055952323', '-9.140481374272408', 'alameda'),
+('AEIST Rest', '9:00', '23:00', '38.73639882187371', '-9.136940968913903', 'alameda'),
+('Zombies AEIST Rest', '22:00', '23:00', '38.73639882187371', '-9.136940968913903', 'alameda');
+
+
+-- Insert data into dish table
+INSERT INTO dish (name, price, food_service_id) VALUES
+('Bras CodFish', 12.50, 1),
+('Pizza', 10.00, 1),
+('Tiramisu', 6.00, 2),
+('Chicken', 8.50, 2),
+('Salmon Grill', 12.00, 3),
+('Vegetables Soup', 3.00, 3),
+('Taco', 4.50, 4),
+('Burrito', 9.00, 4),
+('Churros', 5.00, 5);
+
+INSERT INTO public.dish_photo(id, photo_url, dish_id) VALUES
+(1, 'https://www.pingodoce.pt/wp-content/uploads/2016/03/bacalhau-a-bras.jpg', 1),
+(2, 'https://pic-eurogardi-com.s3.ir-thr-at1.arvanstorage.ir/content/port-20.jpg', 1);

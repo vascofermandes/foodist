@@ -34,4 +34,20 @@ public class FoodServiceController {
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(foodService.get().getDishes());
     }
+
+    @GetMapping("/{campus}")
+    public ResponseEntity<List<FoodService>> getDishesByCampus(@PathVariable String campus){
+        List<FoodService> foodServices = foodServiceService.findByCampus(campus);
+        if(foodServices.isEmpty())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(foodServices);
+    }
+
+    @GetMapping("/details/{id}")
+    public ResponseEntity<FoodService> getFoodServiceById(@PathVariable Long id){
+        Optional<FoodService> foodService = foodServiceService.findById(id);
+        if(foodService.isEmpty())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(foodService.get());
+    }
 }

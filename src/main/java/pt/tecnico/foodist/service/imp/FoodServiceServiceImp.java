@@ -30,8 +30,16 @@ public class FoodServiceServiceImp implements FoodServiceService {
     }
 
     @Override
+    public List<FoodService> findByCampus(String campus) {
+        logger.info("Finding FoodService at " + campus);
+        return foodServiceRepository.findByCampus(campus);
+    }
+
+    @Override
     public FoodService create(FoodService foodService) {
         logger.info("Create a FoodService " + foodService.getName());
         return foodServiceRepository.save(foodService);
     }
+
+
 }

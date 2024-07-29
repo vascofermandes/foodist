@@ -12,15 +12,12 @@ public class DishPhoto {
 
     private String photoUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "dish_id")
-    private Dish dish;
+    private Long dish_id;
 
     public DishPhoto() {}
 
-    public DishPhoto(String photoUrl, Dish dish) {
+    public DishPhoto(String photoUrl) {
         this.photoUrl = photoUrl;
-        this.dish = dish;
     }
 
     public Long getId() {
@@ -39,11 +36,11 @@ public class DishPhoto {
         this.photoUrl = photoUrl;
     }
 
-    public Dish getDish() {
-        return dish;
+    public Long getDish_id() {
+        return dish_id;
     }
 
-    public void setDish(Dish dish) {
-        this.dish = dish;
+    public void setDish_id(Long dish_id) {
+        this.dish_id = dish_id;
     }
 }

@@ -10,8 +10,11 @@ import pt.tecnico.foodist.service.DishPhotoService;
 import pt.tecnico.foodist.service.DishService;
 import pt.tecnico.foodist.utils.FileStorageService;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/dishes")
+@RequestMapping("/dishPhotos")
 public class DishPhotoController {
 
     @Autowired
@@ -23,11 +26,22 @@ public class DishPhotoController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @GetMapping()
+    public List<DishPhoto> findAll(){
+        return dishPhotoService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<DishPhoto> findById(@PathVariable(value = "id") Long id){
+        return dishPhotoService.findById(id);
+    }
+
     @PostMapping("/{dishId}/photos")
     public ResponseEntity<DishPhoto> uploadPhoto(@PathVariable Long dishId, @RequestParam("file") MultipartFile file) {
         Dish dish = dishService.findById(dishId).orElseThrow(() -> new RuntimeException("Dish not found"));
         String filePath = fileStorageService.store(file);
-        DishPhoto photo = new DishPhoto(filePath, dish);
+        DishPhoto photo = new DishPhoto(filePath);
+        photo.setDish_id(dish.getId());
         dish.getPhotos().add(photo);
         dishPhotoService.save(photo);
         dishService.save(dish);

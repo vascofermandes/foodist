@@ -15,7 +15,8 @@ public class Dish {
 
     private double price;
 
-    @OneToMany(mappedBy = "dish")
+    @OneToMany
+    @JoinColumn(name = "dish_id")
     private List<DishPhoto> photos;
 
     public Dish(String name, double price) {

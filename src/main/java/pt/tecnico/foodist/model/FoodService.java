@@ -18,6 +18,12 @@ public class FoodService {
 
     private LocalTime closeHour;
 
+    private String campus;
+
+    private double latitude;
+
+    private double longitude;
+
     @OneToMany
     @JoinColumn(name = "food_service_id")
     private List<Dish> dishes;
@@ -25,10 +31,24 @@ public class FoodService {
     public FoodService() {
     }
 
-    public FoodService(String name, LocalTime openHour, LocalTime closeHour, List<Dish> dishes) {
+    public FoodService(String name, LocalTime openHour, LocalTime closeHour, String campus, double latitude, double longitude, List<Dish> dishes) {
         this.name = name;
         this.openHour = openHour;
         this.closeHour = closeHour;
+        this.campus = campus;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.dishes = dishes;
+    }
+
+    public FoodService(Long id, String name, LocalTime openHour, LocalTime closeHour, String campus, double latitude, double longitude, List<Dish> dishes) {
+        this.id = id;
+        this.name = name;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+        this.campus = campus;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.dishes = dishes;
     }
 
@@ -70,5 +90,21 @@ public class FoodService {
 
     public void setDishes(List<Dish> dishes) {
         this.dishes = dishes;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
